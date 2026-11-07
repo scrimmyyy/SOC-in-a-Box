@@ -41,3 +41,28 @@ Verified successful event ingestion and alert generation through the Wazuh Threa
 
 ![DET-001 Detection Results](customalert.png)
 ![DET-001 Detection Results](customalert2.png)
+
+
+### DET-002: Multiple Failed Windows Login Detection
+
+**Status:** Successfully tested and validated
+
+**Objective:** Identify repeated Windows authentication failures that could indicate password-guessing activity.
+
+**Data Source:** Windows Security Event ID 4625
+
+**Detection Logic:** Correlates five matching authentication failure events within a 120-second window using Wazuh's `frequency`, `timeframe`, and `if_matched_sid` capabilities.
+
+**Rule Configuration:**
+- Custom Rule ID: `100102`
+- Alert Severity: Level 10
+- Parent Detection Rule: `60122`
+- MITRE ATT&CK: T1110 — Brute Force
+
+**Testing:** Generated controlled failed-login events against a disposable local Windows account inside an isolated VirtualBox lab environment.
+
+**Validation Results:** Confirmed Wazuh generated a Level 10 alert with Rule ID `100102` for the monitored endpoint `Win11Lab`.
+
+**Outcome:** Successfully implemented and validated an authentication event correlation rule, demonstrating SIEM detection engineering and event analysis capabilities.
+
+![DET-002 Detection Results](det-002-failed-login-detection.png)
