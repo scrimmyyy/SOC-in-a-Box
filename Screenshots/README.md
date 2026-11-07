@@ -66,3 +66,27 @@ Verified successful event ingestion and alert generation through the Wazuh Threa
 **Outcome:** Successfully implemented and validated an authentication event correlation rule, demonstrating SIEM detection engineering and event analysis capabilities.
 
 ![DET-002 Detection Results](det-002-failed-login-detection.png)
+
+### DET-003: Windows User Account Creation Detection
+
+**Status:** Successfully tested and validated
+
+**Objective:** Detect the creation of new Windows user accounts that could indicate unauthorized account provisioning or persistence activity.
+
+**Data Source:** Windows Security Event ID 4720
+
+**Detection Logic:** Custom Wazuh rule `100103` identifies user account creation events by matching Windows Event ID 4720 and correlating with built-in rule `60109`.
+
+**Detection Configuration:**
+- Rule ID: `100103`
+- Alert Level: 8
+- MITRE ATT&CK: T1136.001 — Create Account: Local Account
+- Monitored Endpoint: Win11Lab
+
+**Testing:** Created a disposable local user account in an isolated Windows 11 virtual machine.
+
+**Validation:** Confirmed that Wazuh generated a Level 8 alert labeled "DET-003: New Windows user account created."
+
+**Outcome:** Successfully implemented and validated an account-creation detection rule.
+
+![DET-003 Detection](det-003-account-creation.png)
